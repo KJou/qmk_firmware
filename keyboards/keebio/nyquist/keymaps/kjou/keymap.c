@@ -21,8 +21,6 @@ enum custom_keycodes {
   ADJUST,
 };
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
 enum {
   TD_CAPS = 0,
   TD_PAREN,
@@ -36,6 +34,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_BRACK] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
   [TD_BRACE] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR)
 };
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
@@ -117,8 +117,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC, \
       KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,        KC_7,        KC_8,        KC_9,    KC_0,    KC_BSPC, \
     KC_DEL,  _______, _______, _______, _______, _______, TD(TD_PAREN),TD(TD_BRACK),TD(TD_BRACE),KC_MINS, KC_EQL,  KC_BSLS, \
-    _______, KC_LCTL, KC_LALT, KC_LGUI, _______, _______,     _______,     _______,     _______, _______, _______, \
-    _______, _______, _______, _______, _______, KC_ENT,  KC_ENT,      _______,     _______,     _______, _______, _______  \
+    _______, _______, _______, _______, _______, _______,     _______,     _______,     _______, _______, _______, _______,\
+    _______, _______, _______, _______, _______, KC_ENT,  KC_ENT,      _______, KC_LGUI, KC_LALT, KC_LCTL, _______  \
 ),
 
 /* Raise
