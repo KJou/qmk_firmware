@@ -17,13 +17,13 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
-        |           |           | Vol Up/Dn |
-        |    F14    |    F14    |    F14    |
-        |    F14    |    F14    |Shift Layer 1|
+        |             |             |  Vol Up/Dn  |
+        |Shift Layer 1|     F14     |     Mute    |
+        |     F14     |     F14     |        |
      */
     [0] = LAYOUT(
-        KC_F14, KC_F14, KC_F14,
-        KC_F14, KC_F14 , MO(1)
+        MO(1), KC_F14, KC_MUTE,
+        KC_F15, KC_F16 , KC_F20
     ),
     /*
         |   Hue Cycle  |   Increase Brightness  | ToggleRGB |
@@ -36,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-/*
+
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (clockwise) {
@@ -53,4 +53,4 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     }
 }
-*/
+
