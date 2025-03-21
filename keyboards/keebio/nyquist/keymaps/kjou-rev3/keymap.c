@@ -132,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |GAME1 |      |      |      |      | Enter|Enter |      |      |      |      |      |
+ * |GAME1 |GAME2 |      |      |      | Enter|Enter |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT( \
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD,    KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_LPRN, KC_RPRN, KC_DEL,  \
   KC_DEL,     KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______,  _______,  KC_UNDS, KC_PLUS, KC_PIPE, \
   _______,    KC_F7,    KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,  _______,  _______, _______, _______, \
-  TG(_GAME1), _______, _______, _______, _______,  KC_ENT,  KC_ENT,  _______,  _______,  _______, _______, _______ \
+  TG(_GAME1), TG(_GAME2), _______, _______, _______,  KC_ENT,  KC_ENT,  _______,  _______,  _______, _______, _______ \
 ),
 
 /* Adjust (Lower + Raise)
@@ -153,25 +153,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |GAME1 |GAME2 |      |      |      |      |      |             |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] =  LAYOUT( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
-  _______, QK_REBOOT, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL, \
-  _______, _______, _______, _______, _______,  AG_NORM, AG_SWAP, _______, _______, _______,  _______, _______, \
+  _______, QK_BOOT, RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, KC_DEL, \
+  _______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______, _______, _______,  _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  TG(_GAME1), TG(_GAME2), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
 )
 
 
 };
 
-// #ifdef AUDIO_ENABLE
-// float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-// float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
-// float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
-// #endif
+#ifdef AUDIO_ENABLE
+float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
+float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
+float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
+#endif
 
 void persistent_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
