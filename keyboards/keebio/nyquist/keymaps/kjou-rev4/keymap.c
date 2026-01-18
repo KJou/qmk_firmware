@@ -6,8 +6,8 @@
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _WKL 1
-#define _GAME1 2
+#define _GAME1 1
+#define _GAME2 2
 #define _LOWER 3
 #define _RAISE 4
 #define _ADJUST 14
@@ -15,6 +15,7 @@
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   GAME1,
+  GAME2,
   LOWER,
   RAISE,
   ADJUST,
@@ -57,15 +58,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_BSPC, KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
-[_WKL] = LAYOUT_ortho_5x12( \
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
-  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
-  KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
-  KC_LCTL, KC_LCTL, KC_LALT, KC_LALT, LOWER,   KC_BSPC, KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
-),
-
-
 /* Game1
  * ,-----------------------------------------------------------------------------------.
  * | Esc  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
@@ -87,6 +79,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_DOT,  KC_LCTL, KC_LALT, KC_LBRC, KC_RBRC, KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
+/* Game2
+ * ,-----------------------------------------------------------------------------------.
+ * | Esc  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |  ;   |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |  ,   | Ctrl |  Alt |   .  |   /  |Space |Space |Raise | Left | Down |  Up  |Right |
+ * `-----------------------------------------------------------------------------------'
+ */
+ [_GAME2] = LAYOUT_ortho_5x12( \
+  KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
+  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
+  KC_SCLN, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, TD(TD_CAPS), \
+  KC_COMM, KC_LCTL, KC_LALT, KC_DOT,  KC_SLSH, KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+),
+
 /* Lower
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
@@ -95,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Del  |      |      |      |      |      |      |  []  |  {}  |   -  |   =  |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |      |      |      | Ins  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      | Enter|Enter |      | Home | PgDn | PgUp | End  |
  * `-----------------------------------------------------------------------------------'
@@ -104,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,        KC_7,        KC_8,        KC_9,    KC_0,    KC_BSPC, \
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,        KC_7,        KC_8,        KC_9,    KC_0,    KC_DEL,  \
     KC_DEL,  _______, _______, _______, _______, _______, TD(TD_PAREN),TD(TD_BRACK),TD(TD_BRACE),KC_MINS, KC_EQL,  KC_BSLS, \
-    _______, _______, _______, _______, _______, _______, _______,     _______,     _______,     _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______,     _______,     _______,     _______, _______, KC_INS,  \
     _______, _______, _______, _______, _______, KC_ENT,  KC_ENT,      _______,     KC_HOME,     KC_PGDN, KC_PGUP, KC_END   \
 ),
 
@@ -116,17 +129,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |      |      |   _  |   +  |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |      |      |      |      |      |
+ * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |      |      |      |      | Ins  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |GAME1 |  WKL |      |      |      | Enter|Enter |      |      |      |      |      |
+ * |GAME1 |GAME2 |      |      |      | Enter|Enter |      | Home | PgDn | PgUp | End  |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_ortho_5x12( \
   KC_TILD,    KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_LPRN, KC_RPRN, KC_BSPC, \
   KC_TILD,    KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_LPRN, KC_RPRN, KC_DEL,  \
   KC_DEL,     KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______,  _______,  KC_UNDS, KC_PLUS, KC_PIPE, \
-  _______,    KC_F7,    KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,  _______,  _______, _______, _______, \
-  TG(_GAME1), TG(_WKL), _______, _______, _______,  KC_ENT,  KC_ENT,  _______,  _______,  _______, _______, _______ \
+  _______,    KC_F7,    KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,  _______,  _______, _______, KC_INS, \
+  TG(_GAME1),TG(GAME2), _______, _______, _______,  KC_ENT,  KC_ENT,  _______,  KC_HOME,KC_PGDN, KC_PGUP, KC_END \
 ),
 
 /* Adjust (Lower + Raise)
