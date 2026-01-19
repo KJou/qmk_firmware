@@ -5,24 +5,22 @@
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
-#define _QWERTY 0
-#define _GAME1 1
-#define _GAME2 2
-#define _LOWER 3
-#define _RAISE 4
-#define _ADJUST 14
 
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  GAME1,
-  GAME2,
-  LOWER,
-  RAISE,
-  ADJUST,
+enum layer_names {
+    _QWERTY,
+    _GAME1,
+    _GAME2,
+    _LOWER,
+    _RAISE,
+    _ADJUST
 };
 
+#define LOWER LT(_LOWER, KC_DEL) // Tap for delete, hold for lower
+#define RAISE LT(_RAISE, KC_ENT) // Tap for enter, hold for raise
+
+
 enum {
-  TD_CAPS = 0,
+  TD_CAPS,
   TD_PAREN,
   TD_BRACK,
   TD_BRACE
@@ -35,6 +33,7 @@ tap_dance_action_t tap_dance_actions[] = {
   [TD_BRACE] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR)
 };
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -45,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Ctrl | Ctrl | Alt  | GUI  |Lower | BKSP |Space |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
@@ -66,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |   \  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |   .  | Ctrl |  Alt |   [  |   ]  |Space |Space |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
@@ -87,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |  ;   |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |CAPS  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |  ,   | Ctrl |  Alt |   .  |   /  |Space |Space |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
@@ -139,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD,    KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_LPRN, KC_RPRN, KC_DEL,  \
   KC_DEL,     KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______,  _______,  KC_UNDS, KC_PLUS, KC_PIPE, \
   _______,    KC_F7,    KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,  _______,  _______, _______, KC_INS, \
-  TG(_GAME1),TG(GAME2), _______, _______, _______,  KC_ENT,  KC_ENT,  _______,  KC_HOME,KC_PGDN, KC_PGUP, KC_END \
+  TG(_GAME1),TG(_GAME2), _______, _______, _______,  KC_ENT,  KC_ENT,  _______,  KC_HOME,KC_PGDN, KC_PGUP, KC_END \
 ),
 
 /* Adjust (Lower + Raise)
@@ -157,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] =  LAYOUT_ortho_5x12( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
-  _______, QK_BOOT, RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, KC_DEL, \
+  _______, QK_BOOT, RM_TOGG, RM_NEXT, RM_HUED, RM_HUEU, RM_SATD, RM_SATU, RM_VALD, RM_VALU, _______, KC_DEL, \
   _______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______, _______, _______,  _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
@@ -166,37 +165,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-#ifdef AUDIO_ENABLE
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
-float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
-#endif
-
-void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
-
+/* Trying to push this functionality to layer state set
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    //case QWERTY:
-    //  if (record->event.pressed) {
-    //    #ifdef AUDIO_ENABLE
-    //     PLAY_SONG(tone_qwerty);
-    //    #endif
-    //    persistent_default_layer_set(1UL<<_QWERTY);
-    //  }
-    //  return false;
-    //  break;
-    // case COLEMAK:
-    //   if (record->event.pressed) {
-    //     #ifdef AUDIO_ENABLEs
-    //       PLAY_SONG(tone_colemak);
-    //     #endif
-    //     persistent_default_layer_set(1UL<<_COLEMAK);
-    //   }
-    //   return false;
-    //   break;
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
@@ -228,14 +199,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+*/
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
     case _GAME1:
         if (!(rgb_matrix_is_enabled())) {
           rgb_matrix_enable_noeeprom();
-          rgb_matrix_mode_noeeprom(2);
-          rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
+          rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
+          rgb_matrix_sethsv_noeeprom(201,255,120); //Magenta
+          rgb_matrix_set_speed_noeeprom(40);
+        }
+        break;
+    case _GAME2:
+        if (!(rgb_matrix_is_enabled())) {
+          rgb_matrix_enable_noeeprom();
+          rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
+          rgb_matrix_sethsv_noeeprom(127,255,120); //Cyan
+          rgb_matrix_set_speed_noeeprom(40);
         }
         break;
     case _RAISE:
@@ -250,29 +231,22 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         }
         break;
     }
-  return state;
+  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
-/*
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    HSV hsv = {0, 255, 255};
 
-    if (layer_state_is(layer_state, 2)) {
-        hsv = {130, 255, 255};
-    } else {
-        hsv = {30, 255, 255};
-    }
-
-    if (hsv.v > rgb_matrix_get_val()) {
-        hsv.v = rgb_matrix_get_val();
-    }
-    RGB rgb = hsv_to_rgb(hsv);
-
-    for (uint8_t i = led_min; i < led_max; i++) {
-        if (HAS_FLAGS(g_led_config.flags[i], 0x01)) { // 0x01 == LED_FLAG_MODIFIER
-            rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
-        }
-    }
-    return false;
-}
-*/
+// bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+//     for (uint8_t i = led_min; i < led_max; i++) {
+//         switch(get_highest_layer(layer_state|default_layer_state)) {
+//             case _GAME1:
+//                 rgb_matrix_set_color(i, RGB_MAGENTA);
+//                 break;
+//             case _GAME2:
+//                 rgb_matrix_set_color(i, RGB_CYAN);
+//                 break;
+//             default:
+//                 break;
+//         }
+//     }
+//     return false;
+// }
