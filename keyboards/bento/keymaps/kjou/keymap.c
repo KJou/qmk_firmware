@@ -22,8 +22,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         |    F14    |    F14    |Shift Layer 1|
      */
     [0] = LAYOUT(
-        KC_F14, KC_F14, KC_F14,
-        KC_F14, KC_F14 , MO(1)
+        KC_F20, KC_MS_BTN5, KC_MUTE,
+        KC_MS_BTN2, KC_MS_BTN4, KC_MS_BTN1
     ),
     /*
         |   Hue Cycle  |   Increase Brightness  | ToggleRGB |
