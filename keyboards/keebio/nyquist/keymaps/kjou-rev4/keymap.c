@@ -206,14 +206,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     case _GAME1:
         rgb_matrix_enable_noeeprom();
         rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
-        rgb_matrix_sethsv_noeeprom(201,255,60); //Magenta
-        rgb_matrix_set_speed_noeeprom(50);
+        rgb_matrix_sethsv_noeeprom(201,255,128); //Magenta
+        //rgb_matrix_set_speed_noeeprom(64);
         break;
     case _GAME2:
         rgb_matrix_enable_noeeprom();
         rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
-        rgb_matrix_sethsv_noeeprom(127,255,60); //Cyan
-        rgb_matrix_set_speed_noeeprom(50);
+        rgb_matrix_sethsv_noeeprom(127,255,128); //Cyan
+        //rgb_matrix_set_speed_noeeprom(64);
         break;
     case _RAISE:
         break;
