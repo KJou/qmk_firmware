@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 #define TAPPING_TERM 150
+#define RETRO_TAPPING
 
 // #define USE_I2C
 
