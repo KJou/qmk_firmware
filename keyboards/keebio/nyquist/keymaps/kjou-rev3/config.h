@@ -23,15 +23,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
-#undef RGBLED_NUM
+#define RGB_MATRIX_DISABLE_SHARED_KEYCODES //recommended by QMK while they transition towards separating UG and RM
+
 #undef RGBLIGHT_EFFECT_STATIC_GRADIENT
 #undef RGBLIGHT_EFFECT_RAINBOW_SWIRL
 #undef RGBLIGHT_EFFECT_SNAKE
 #undef RGBLIGHT_EFFECT_CHRISTMAS
 #define RRGBLIGHT_EFFECT_BREATHING
-//#define RGBLED_NUM 12
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
 
-#define TAPPING_TERM 175
+#define TAPPING_TERM 150
+#define RETRO_TAPPING
